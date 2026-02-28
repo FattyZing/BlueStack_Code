@@ -1,0 +1,42 @@
+Config = {
+     start = 1,
+     ends = 1000,
+     delay = 80 --Milisecond
+}
+
+
+--Don't Edit
+
+function enter()
+    pkt = {}
+    pkt.x = GetLocal().posX
+    pkt.y = GetLocal().posY
+    pkt.px = math.floor(GetLocal().posX//32);
+    pkt.py = math.floor(GetLocal().posY//32);
+    pkt.type = 7;
+    SendPacketRaw(false, pkt)
+end
+
+log("Script may `4BANNABLE`o.")
+Sleep(1000)
+function vr(var)
+if var.v1:find("OnTalkBubble") and var.v3:find("`2The door opens") then
+LogToConsole("`9[ Guessed ] `2Door Password is `9"..reader.."`2 or lower.")
+done = true
+error("\nScript By Bchola.")
+end
+return false
+end
+
+AddHook(vr, "OnVariant")
+
+for i = Config.start, Config.ends do
+if done == true then
+break
+end
+reader = i
+enter()
+Sleep(Config.delay)
+SendPacket(2,"action|dialog_return\ndialog_name|password_reply\ntilex|"..math.floor(GetLocal().posX//32).."|\ntiley|"..math.floor(GetLocal().posY//32).."|\npassword|"..i)
+Sleep(Config.delay)
+end
