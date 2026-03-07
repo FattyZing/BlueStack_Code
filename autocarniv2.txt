@@ -1,0 +1,122 @@
+mode = 1
+delayenter = 800
+delaymode = 1000
+delaytp = 700
+
+-- Mode 1 = Growganoth Left
+-- Mode 2 = Growganoth Right
+-- Mode 3 = Parkour
+-- Mode 4 = Maze
+
+EditToggle("Antibounce", true)
+EditToggle("ModFly", true)
+
+function Enter(x, y)
+    local pkt = {}
+    pkt.type = 7
+    pkt.int_data = 18
+    pkt.pos_x = GetLocal().pos_x
+    pkt.pos_y = GetLocal().pos_y
+    pkt.int_x = x
+    pkt.int_y = y
+    SendPacketRaw(false, pkt)
+end
+
+function Punch(x, y)
+    local pkt = {}
+    pkt.type = 3
+    pkt.int_data = 18
+    pkt.pos_x = GetLocal().pos_x
+    pkt.pos_y = GetLocal().pos_y
+    pkt.int_x = x
+    pkt.int_y = y
+    SendPacketRaw(false, pkt)
+end
+
+function seleksi()
+    if mode == 1 then
+        FindPath(9, 39)
+        Sleep(delaymode)
+        FindPath(7, 37)
+        Sleep(delaytp)
+        Enter(7, 36)
+        Sleep(delayenter)
+    end
+end
+
+function seleksi2()
+    if mode == 2 then
+        FindPath(90, 39)
+        Sleep(delaymode)
+        FindPath(92, 37)
+        Sleep(delaytp)
+        Enter(92, 36)
+        Sleep(delayenter)
+    end
+end
+
+function seleksi3()
+    if mode == 3 then
+        FindPath(35, 16)
+        Sleep(delaymode)
+        FindPath(33, 13)
+        Sleep(delaytp)
+        Enter(33, 12)
+        Sleep(delayenter)
+    end
+end
+
+function seleksi4()
+    if mode == 4 then
+        FindPath(27, 25)
+        Sleep(delaymode)
+        FindPath(26, 25)
+        Sleep(delaytp)
+        Enter(26, 24)
+        Sleep(delayenter)
+    end
+end
+
+function lanjut1()
+    if mode == 1 then
+        FindPath(3, 23)
+        Sleep(delaymode)
+        Punch(3, 22)
+        Sleep(delaytp)
+    end
+end
+
+function lanjut2()
+    if mode == 2 then
+        FindPath(96, 23)
+        Sleep(delaymode)
+        Punch(96, 22)
+        Sleep(delaytp)
+    end
+end
+
+function lanjut3()
+    if mode == 3 then
+        FindPath(31, 11)
+        Sleep(delaymode)
+    end
+end
+
+function lanjut4()
+    if mode == 4 then
+        FindPath(24, 24)
+        Sleep(delaymode)
+    end
+end
+
+while true do
+    seleksi()
+    seleksi2()
+    seleksi3()
+    seleksi4()
+
+    lanjut1()
+    lanjut2()
+    lanjut3()
+    lanjut4()
+end
